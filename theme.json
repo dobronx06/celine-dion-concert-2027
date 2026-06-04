@@ -1,0 +1,84 @@
+{
+  "slug": "celine-dion-concert-2027",
+  "sujet": "Countdown vers les concerts de Céline Dion à Paris La Défense Arena (28-29 mai 2027)",
+  "ambiance": "Élégance théâtrale parisienne rencontre glamour scénique : un retour triomphal attendu dans une atmosphère de fête sophistiquée, où l'émotion et la célébration se mêlent sous les projecteurs.",
+
+  "couleurs": {
+    "bg": "#0a0812",
+    "surface": "#1a1320",
+    "surfaceElevated": "#2a1f35",
+    "text": "#f5f1ed",
+    "muted": "#a89fb0",
+    "primary": "#d4af37",
+    "primaryLight": "#f0d97a",
+    "accent": "#e8b4d9",
+    "accentDeep": "#c77bb5",
+    "success": "#8fb996",
+    "danger": "#d97c8e",
+    "spotlight": "#ffeaa7",
+    "stage": "#2d1b3d"
+  },
+
+  "typo": {
+    "titre": "Cinzel, Playfair Display, Georgia, serif",
+    "texte": "Inter, system-ui, -apple-system, sans-serif",
+    "google_fonts": [
+      "Cinzel:wght@400;600;700",
+      "Inter:wght@300;400;500;600"
+    ]
+  },
+
+  "style": {
+    "radius": "0.5rem",
+    "ombre": "0 8px 32px rgba(212, 175, 55, 0.15), 0 2px 8px rgba(0, 0, 0, 0.4)",
+    "ombreForte": "0 16px 64px rgba(212, 175, 55, 0.25), 0 4px 16px rgba(0, 0, 0, 0.6)",
+    "densite": "aeree",
+    "bordure": "1px solid rgba(212, 175, 55, 0.2)",
+    "blur": "blur(12px)"
+  },
+
+  "ton_editorial": "Chaleureux et anticipatif, comme une confidence entre fans. On tutoie l'audience avec élégance : 'Plus que X jours avant de la retrouver sur scène'. Vocabulaire émotionnel (retrouvailles, attente, célébration) sans tomber dans le sensationnalisme. On évoque la magie de l'événement sans en faire trop.",
+
+  "accroche_hero": "Le retour de Céline à Paris",
+
+  "visual_cues": {
+    "gradients": [
+      "linear-gradient(135deg, #0a0812 0%, #1a1320 50%, #2d1b3d 100%)",
+      "radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 60%)",
+      "linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.05) 100%)"
+    ],
+    "effets": [
+      "Effet spotlight/projecteur en radial gradient derrière le compteur principal",
+      "Glow subtil doré autour des chiffres du countdown",
+      "Backdrop blur sur les cartes flottantes pour effet de profondeur scénique",
+      "Animation de shimmer/brillance sur les accents dorés",
+      "Particules dorées flottantes (optionnel, subtil)"
+    ],
+    "motifs": [
+      "Lignes fines dorées pour séparer les sections (rideau de scène)",
+      "Texture grain/noise légère sur le fond (atmosphère cinématographique)",
+      "Coins arrondis élégants, pas trop ronds",
+      "Espacement généreux, respiration visuelle"
+    ]
+  },
+
+  "meta": {
+    "title": "Céline Dion à Paris 2027 - Compte à rebours officieux",
+    "description": "Compteur jusqu'aux concerts de Céline Dion à Paris La Défense Arena les 28 et 29 mai 2027. Informations, dates et anticipation pour son retour triomphal sur scène.",
+    "og_image_concept": "Fond noir élégant avec compteur doré stylisé, nom 'CÉLINE DION' en Cinzel, date '28-29 MAI 2027' et 'PARIS LA DÉFENSE ARENA' en lettres lumineuses"
+  },
+
+  "references_inspiration": [
+    "Affiches de concert Art Déco parisien (élégance années 20-30)",
+    "Éclairages de scène des résidences Vegas (glamour, projecteurs)",
+    "Identité visuelle haute couture française (sobriété luxueuse)",
+    "Programmes de spectacle du Palais Garnier (typographie élégante)"
+  ],
+
+  "notes_implementation": {
+    "contraste": "Testé AA sur tous les couples texte/fond. Le doré #d4af37 sur fond sombre #0a0812 passe largement.",
+    "mobile": "Tailles de titre réduites progressivement, espacement maintenu. Compteur empilé verticalement si nécessaire.",
+    "performance": "Limiter les animations à transform/opacity pour GPU. Backdrop-filter avec fallback.",
+    "accessibilite": "Focus states visibles avec outline doré. Reduced motion query pour désactiver animations si préférence utilisateur."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "celine-dion-concert-2027",
+  "sujet": "Countdown vers les concerts de Celine Dion les 28-29 mai 2027 a Paris La Defense Arena",
+  "famille": "countdown",
+  "verdict": "VERT",
+  "nature_donnees": "factuelle",
+  "sources_propres_dispo": [
+    "https://www.celinedion.com/news/due-to-overwhelming-demand-celine-dion-announces-additional-dates-at-paris-la-defense-arena-in-may-2027/",
+    "https://www.franceinfo.fr/culture/musique/celine-dion/celine-dion-annonce-dix-concerts-supplementaires-en-2027_8040209.html",
+    "https://www.ledevoir.com/culture/musique/984326/celine-dion-annonce-dix-nouvelles-dates-concert-paris-mai-2027"
+  ],
+  "images": "sans image",
+  "contraintes": "Ajouter mention 'Site non affilie a Celine Dion ni a ses representants' visible en footer. Ne pas utiliser le logo officiel, de photos officielles, ni aucun asset visuel propriétaire. Ne pas reproduire de paroles ou de musique.",
+  "recommandation": "GO",
+  "raison": "Le site repose exclusivement sur des faits publics (dates de concert officiellement annoncees). L'usage du nom 'Celine Dion' est couvert par le nominative fair use (designation factuelle de l'artiste, sans suggestion d'affiliation). Aucun contenu protege n'est reproduit : pas de musique, pas de paroles, pas de photos, pas de logo. Le trademark USPTO #3322273 couvre des classes de produits (vetements, accessoires) sans rapport avec un site informatif. Un simple countdown textuel vers un evenement public ne pose aucun risque juridique significatif."
+}

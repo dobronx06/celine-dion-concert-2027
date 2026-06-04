@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EventCard from '../components/EventCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import data from '../data/data.json';
+
+const events = data.evenements;
+
+// Sort: upcoming first (soonest first), then past (most recent first)
+const now = Date.now();
+const upcoming = events
+  .filter(e => new Date(e.date_iso).getTime() > now)
+  .sort((a, b) => new Date(a.date_iso).getTime() - new Date(b.date_iso).getTime());
+const past = events
+  .filter(e => new Date(e.date_iso).getTime() <= now)
+  .sort((a, b) => new Date(b.date_iso).getTime() - new Date(a.date_iso).getTime());
+const sorted = [...upcoming, ...past];
+
+const siteUrl = import.meta.env.SITE || 'https://example.com';
+
+// JSON-LD ItemList
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: data.titre,
+  numberOfItems: events.length,
+  itemListElement: sorted.map((e, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${siteUrl}/${e.slug}/`,
+    name: e.nom,
+  })),
+};
+
+const description = `Compte à rebours en direct pour ${events.length} événements à venir.`;
+---
+
+<Layout
+  title="Accueil"
+  description={description}
+  jsonLd={jsonLd}
+  ogImage="/og/index.svg"
+>
+  <section class="hero">
+    <h1>{data.titre}</h1>
+    <p>
+      {upcoming.length > 0
+        ? `${upcoming.length} événement${upcoming.length > 1 ? 's' : ''} à venir — chaque seconde compte.`
+        : 'Tous les événements sont passés.'}
+    </p>
+  </section>
+
+  <section class="events-grid" aria-label="Liste des événements">
+    {sorted.map((event, i) => (
+      <>
+        <EventCard
+          nom={event.nom}
+          slug={event.slug}
+          dateIso={event.date_iso}
+          fuseau={event.fuseau}
+          confirme={event.confirme}
+          descriptionCourte={event.description_courte}
+        />
+        {i === 1 && <AdSlot id="ad-mid" format="banner" />}
+      </>
+    ))}
+  </section>
+
+  <AdSlot id="ad-bottom" format="banner" />
+</Layout>

@@ -1,0 +1,19 @@
+{
+  "slug": "celine-dion-concert-2027",
+  "famille": "countdown",
+  "ok": true,
+  "date_validation": "2026-06-04",
+  "problemes": [],
+  "corrections_suggerees": [],
+  "details": {
+    "json_valide": true,
+    "dates_iso8601": true,
+    "dates_plausibles": true,
+    "champs_obligatoires": true,
+    "sources_documentees": true,
+    "disclaimer_present": true,
+    "nombre_evenements": 2,
+    "nombre_sources": 3
+  },
+  "message": "Dataset conforme au schema countdown. Pret pour l'assemblage."
+}

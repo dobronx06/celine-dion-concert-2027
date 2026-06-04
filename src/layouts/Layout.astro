@@ -1,0 +1,110 @@
+---
+import theme from '../data/theme.json';
+import data from '../data/data.json';
+import '../styles/global.css';
+import '../styles/celine-theme.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const { title, description = '', jsonLd, canonical, ogImage, ogType = 'website' } = Astro.props;
+const siteTitle = `${title} | ${data.titre}`;
+const c = theme.couleurs;
+const f = theme.polices;
+const r = theme.arrondis;
+
+const siteUrl = import.meta.env.SITE || 'https://example.com';
+const currentUrl = canonical || `${siteUrl}${Astro.url.pathname}`;
+const resolvedOgImage = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
+  : `${siteUrl}/og/index.svg`;
+
+const cssVars = `:root {
+  --c-fond: ${c.fond};
+  --c-fond-carte: ${c.fond_carte};
+  --c-fond-digit: ${c.fond_digit};
+  --c-texte: ${c.texte};
+  --c-texte-secondaire: ${c.texte_secondaire};
+  --c-accent: ${c.accent};
+  --c-accent-hover: ${c.accent_hover};
+  --c-confirme: ${c.confirme};
+  --c-non-confirme: ${c.non_confirme};
+  --c-passe: ${c.passe};
+  --c-bordure: ${c.bordure};
+  --c-digit-texte: ${c.digit_texte};
+  --font-titre: ${f.titre};
+  --font-corps: ${f.corps};
+  --font-digit: ${f.digit};
+  --r-petit: ${r.petit};
+  --r-moyen: ${r.moyen};
+  --r-grand: ${r.grand};
+}`;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteTitle}</title>
+    {description && <meta name="description" content={description} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={siteTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={data.titre} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={siteTitle} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+    <style is:inline set:html={cssVars}></style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+
+    <header class="site-header">
+      <div class="container">
+        <a href="/">{data.titre}</a>
+      </div>
+    </header>
+
+    <main id="main" class="container">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="disclaimer" style="font-weight: 500; margin-bottom: 1rem;">
+          Site non affilié à Céline Dion ni à ses représentants.
+        </p>
+        <p class="source-link">
+          Source : <a href={data.source_principale} target="_blank" rel="noopener">{data.source_principale}</a>
+        </p>
+        <p style="margin-top:0.5rem;">Dernière mise à jour : {data.derniere_maj}</p>
+      </div>
+    </footer>
+  </body>
+</html>

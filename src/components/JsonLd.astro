@@ -1,0 +1,33 @@
+---
+interface EventData {
+  nom: string;
+  dateIso: string;
+  fuseau: string;
+  descriptionCourte: string;
+  slug: string;
+}
+
+interface Props {
+  event: EventData;
+  siteUrl: string;
+}
+
+const { event, siteUrl } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: event.nom,
+  startDate: event.dateIso,
+  description: event.descriptionCourte,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  url: `${siteUrl}/${event.slug}/`,
+  location: {
+    '@type': 'VirtualLocation',
+    url: `${siteUrl}/${event.slug}/`,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

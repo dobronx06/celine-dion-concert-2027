@@ -1,0 +1,26 @@
+{
+  "couleurs": {
+    "fond": "#0a0812",
+    "fond_carte": "#1a1320",
+    "fond_digit": "#2a1f35",
+    "texte": "#f5f1ed",
+    "texte_secondaire": "#a89fb0",
+    "accent": "#d4af37",
+    "accent_hover": "#f0d97a",
+    "confirme": "#8fb996",
+    "non_confirme": "#fdcb6e",
+    "passe": "#d97c8e",
+    "bordure": "rgba(212, 175, 55, 0.2)",
+    "digit_texte": "#ffffff"
+  },
+  "polices": {
+    "titre": "'Cinzel', 'Playfair Display', Georgia, serif",
+    "corps": "'Inter', system-ui, -apple-system, sans-serif",
+    "digit": "'Cinzel', 'Playfair Display', Georgia, serif"
+  },
+  "arrondis": {
+    "petit": "0.5rem",
+    "moyen": "0.5rem",
+    "grand": "0.5rem"
+  }
+}

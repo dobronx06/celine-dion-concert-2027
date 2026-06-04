@@ -1,0 +1,17 @@
+---
+interface Props {
+  id?: string;
+  format?: 'banner' | 'rectangle';
+}
+
+const { id = 'ad-1', format = 'banner' } = Astro.props;
+
+const style = format === 'rectangle'
+  ? 'min-height:250px;max-width:300px;margin-inline:auto;'
+  : 'min-height:90px;';
+---
+
+<aside class="ad-slot" id={id} style={style} aria-label="Espace publicitaire" role="complementary">
+  <!-- Ad network script goes here -->
+  <span>Publicité</span>
+</aside>

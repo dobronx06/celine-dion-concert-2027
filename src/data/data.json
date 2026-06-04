@@ -1,0 +1,24 @@
+{
+  "titre": "Concerts de Céline Dion à Paris La Défense Arena - Mai 2027",
+  "slug": "celine-dion-concert-2027",
+  "source_principale": "https://www.celinedion.com/news/due-to-overwhelming-demand-celine-dion-announces-additional-dates-at-paris-la-defense-arena-in-may-2027/",
+  "derniere_maj": "2026-06-04",
+  "evenements": [
+    {
+      "nom": "Céline Dion - Paris La Défense Arena (vendredi 28 mai)",
+      "slug": "celine-dion-28-mai-2027",
+      "date_iso": "2027-05-28T20:00:00+02:00",
+      "fuseau": "Europe/Paris",
+      "confirme": true,
+      "description_courte": "Concert de la série CELINE DION PARIS 2026-2027. Heure par défaut (20h00), non confirmée explicitement pour cette date."
+    },
+    {
+      "nom": "Céline Dion - Paris La Défense Arena (samedi 29 mai)",
+      "slug": "celine-dion-29-mai-2027",
+      "date_iso": "2027-05-29T20:00:00+02:00",
+      "fuseau": "Europe/Paris",
+      "confirme": true,
+      "description_courte": "Dernier concert de la série mai 2027. Heure par défaut (20h00), non confirmée explicitement pour cette date."
+    }
+  ]
+}
