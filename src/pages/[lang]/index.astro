@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import EventCard from '../../components/EventCard.astro';
 import ShareButton from '../../components/ShareButton.astro';
 import data from '../../data/data.json';
+import articles from '../../data/articles.json';
 import { t, locales, localePath, type Locale } from '../../i18n';
 
 export function getStaticPaths() {
@@ -79,5 +80,18 @@ const description = t(locale, 'home.description', { count: String(events.length)
         locale={locale}
       />
     ))}
+  </section>
+
+  <section class="articles-section" aria-label={t(locale, 'home.articles_label')}>
+    <h2 class="articles-title">{t(locale, 'home.articles_title')}</h2>
+    <div class="articles-grid">
+      {articles.map((article) => (
+        <a href={localePath(locale, `/articles/${article.slug}/`)} class="article-card">
+          <span class="article-card__badge">{article.axe === 'chansons' ? t(locale, 'article.badge_song') : t(locale, 'article.badge_career')}</span>
+          <h3 class="article-card__title">{article.titre[locale] || article.titre.fr}</h3>
+          <p class="article-card__desc">{article.description[locale] || article.description.fr}</p>
+        </a>
+      ))}
+    </div>
   </section>
 </Layout>

@@ -49,5 +49,15 @@
   "og.day_one": "jour",
   "og.day_many": "jours",
   "lang.switch": "EN",
-  "lang.switch_label": "English version"
+  "lang.switch_label": "English version",
+  "article.back": "Accueil",
+  "article.back_label": "Retour a l'accueil",
+  "article.badge_song": "Chanson iconique",
+  "article.badge_career": "Carriere",
+  "article.related": "A lire aussi",
+  "article.related_label": "Articles lies",
+  "article.cta": "En attendant de la retrouver sur scene...",
+  "article.cta_link": "Voir le compte a rebours",
+  "home.articles_title": "Celine Dion : l'artiste et sa musique",
+  "home.articles_label": "Articles sur Celine Dion"
 }

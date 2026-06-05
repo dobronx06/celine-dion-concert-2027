@@ -49,5 +49,15 @@
   "og.day_one": "day",
   "og.day_many": "days",
   "lang.switch": "FR",
-  "lang.switch_label": "Version francaise"
+  "lang.switch_label": "Version francaise",
+  "article.back": "Home",
+  "article.back_label": "Back to home",
+  "article.badge_song": "Iconic song",
+  "article.badge_career": "Career",
+  "article.related": "Read also",
+  "article.related_label": "Related articles",
+  "article.cta": "While we wait to see her back on stage...",
+  "article.cta_link": "See the countdown",
+  "home.articles_title": "Celine Dion: the artist and her music",
+  "home.articles_label": "Articles about Celine Dion"
 }

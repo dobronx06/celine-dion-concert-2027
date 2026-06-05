@@ -1,0 +1,221 @@
+{
+  "slug": "celine-dion-concert-2027",
+  "sujet": "Concerts de Celine Dion a Paris La Defense Arena - Mai 2027",
+  "famille": "countdown",
+  "hub": "Page d'accueil countdown (compte a rebours vers les 10 dates de mai 2027)",
+  "direction_editoriale": "Contenu centre sur Celine Dion en tant qu'artiste : ses chansons iconiques, sa carriere, ses collaborations, son comeback. Angle fan qui attend le concert et espere entendre ces titres. Pas de contenu logistique evenementiel.",
+  "axes": [
+    {
+      "axe": "Chansons iconiques",
+      "description": "Pages dediees aux morceaux les plus emblematiques de Celine Dion. Chaque page raconte l'histoire de creation, les anecdotes meconnues, l'impact culturel et ce que ce titre represente dans le cadre des concerts a venir. Selection basee sur les streams Spotify, la notoriete culturelle et le potentiel SEO longue traine.",
+      "pages": [
+        {
+          "slug_page": "my-heart-will-go-on-histoire",
+          "titre_fr": "My Heart Will Go On : l'histoire de la chanson que Celine Dion ne voulait pas chanter",
+          "titre_en": "My Heart Will Go On: the story of the song Celine Dion almost refused to sing",
+          "requete_cible": "My Heart Will Go On histoire chanson Celine Dion",
+          "description": "L'histoire complete de la chanson du Titanic. James Cameron ne voulait pas de chanteuse, Celine ne voulait pas l'enregistrer, Rene Angelil l'a convaincue de faire une demo unique. James Horner l'a composee en secret. Le resultat : numero 1 dans 25 pays, Oscar, Grammy, et le single le plus vendu de 1998. Pourquoi cette chanson est devenue bien plus grande que le film. Anecdote sur la prise unique qui est devenue la version finale.",
+          "angle_editorial": "Le paradoxe d'un chef-d'oeuvre que personne ne voulait faire. Cameron, Dion et Horner etaient tous reticents. L'histoire de comment trois refus ont produit l'une des chansons les plus connues de l'histoire.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "pour-que-tu-maimes-encore-goldman",
+            "the-power-of-love-premier-numero-un",
+            "its-all-coming-back-to-me-now-steinman",
+            "comeback-celine-dion-jo-paris-2027"
+          ]
+        },
+        {
+          "slug_page": "pour-que-tu-maimes-encore-goldman",
+          "titre_fr": "Pour que tu m'aimes encore : quand Goldman pensait avoir ecrit une chanson mineure",
+          "titre_en": "Pour que tu m'aimes encore: when Goldman thought he'd written a minor song",
+          "requete_cible": "Pour que tu m'aimes encore histoire Goldman Celine Dion",
+          "description": "Jean-Jacques Goldman considere Pour que tu m'aimes encore comme une chanson secondaire de l'album D'eux. Il prefere J'attendais ou La memoire d'Abraham. Mais quand il chante ses demos face a Celine et Rene, c'est sur ce titre que leur reaction est la plus forte -- Goldman la trouve presque etrange. Le titre devient le single francophone le plus vendu de l'histoire : 2,1 millions en France, 2,1 millions au Canada (records Guinness). 12 semaines numero 1 en France.",
+          "angle_editorial": "L'histoire d'un compositeur qui ne reconnait pas son propre chef-d'oeuvre. Goldman, l'auteur le plus populaire de France, passe a cote de ce qui deviendra la plus grande chanson francophone de tous les temps. C'est Celine qui l'a vu.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "album-deux-goldman-celine-dion",
+            "my-heart-will-go-on-histoire",
+            "dansons-nouveau-single-2026",
+            "all-by-myself-hymne-resilience"
+          ]
+        },
+        {
+          "slug_page": "the-power-of-love-premier-numero-un",
+          "titre_fr": "The Power of Love : la reprise qui a fait de Celine Dion une star mondiale",
+          "titre_en": "The Power of Love: the cover that made Celine Dion a global star",
+          "requete_cible": "The Power of Love Celine Dion histoire reprise Jennifer Rush",
+          "description": "En 1993, Celine reprend The Power of Love de Jennifer Rush pour l'album The Colour of My Love. La chanson entre au Billboard Hot 100 a la 90e place et grimpe jusqu'au numero 1 en 10 semaines -- son tout premier numero 1 americain. Quatre semaines au sommet. L'interpretation est si dominante que les medias finissent par citer la version de Celine comme l'originale, effacant presque Jennifer Rush de la memoire collective. Contexte : la chanson originale de 1984, ecrite par Gunther Mende et Candy DeRouge.",
+          "angle_editorial": "Le moment precis ou Celine Dion passe de star canadienne a phenomene mondial. Une reprise qui eclipse l'originale au point de la faire oublier.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "my-heart-will-go-on-histoire",
+            "its-all-coming-back-to-me-now-steinman",
+            "pour-que-tu-maimes-encore-goldman",
+            "comeback-celine-dion-jo-paris-2027"
+          ]
+        },
+        {
+          "slug_page": "its-all-coming-back-to-me-now-steinman",
+          "titre_fr": "It's All Coming Back to Me Now : la chanson qui a oppose Celine Dion a Meat Loaf",
+          "titre_en": "It's All Coming Back to Me Now: the song that pitted Celine Dion against Meat Loaf",
+          "requete_cible": "It's All Coming Back to Me Now Celine Dion Jim Steinman histoire",
+          "description": "Jim Steinman ecrit ce qu'il appelle la chanson la plus romantique jamais composee, inspiree des Hauts de Hurlevent. Il la donne d'abord a Pandora's Box en 1989 (echec commercial : 51e au UK). Quand Celine l'enregistre en 1996 pour Falling into You, elle en fait un tube mondial. Meat Loaf est furieux : il affirme que la chanson lui etait promise pour Bat Out of Hell III. Proces. Steinman gagne et declare que cette chanson devait etre chantee par une femme. 402 millions de streams Spotify.",
+          "angle_editorial": "Une guerre de rock'n'roll derriere une ballade romantique. Jim Steinman, le genie theatral, Meat Loaf le furieux, et Celine qui remporte la mise. L'histoire la plus rocambolesque de la discographie de Celine.",
+          "priorite": "moyenne",
+          "liens_internes": [
+            "hub (page countdown)",
+            "the-power-of-love-premier-numero-un",
+            "my-heart-will-go-on-histoire",
+            "all-by-myself-hymne-resilience",
+            "album-deux-goldman-celine-dion"
+          ]
+        },
+        {
+          "slug_page": "all-by-myself-hymne-resilience",
+          "titre_fr": "All By Myself : comment Celine Dion a transforme une chanson de solitude en hymne de force",
+          "titre_en": "All By Myself: how Celine Dion turned a song about loneliness into an anthem of strength",
+          "requete_cible": "All By Myself Celine Dion histoire chanson",
+          "description": "All By Myself est a l'origine une ballade de solitude d'Eric Carmen (1975), inspiree du 2e concerto de Rachmaninov. Celine la reprend en 1996 sur Falling into You et la transforme en demonstration vocale qui depasse le texte original. La chanson devient un moment-cle de ses concerts en live : la note tenue du pont est l'un des passages les plus attendus par le public. 243 millions de streams Spotify. Avec le combat contre le syndrome de la personne raide, la chanson prend un sens nouveau de resilience.",
+          "angle_editorial": "D'une chanson de solitude a un cri de puissance vocale. Et depuis le SPS, une signification supplementaire. Pourquoi ce titre est devenu le moment ou le public retient son souffle en concert.",
+          "priorite": "moyenne",
+          "liens_internes": [
+            "hub (page countdown)",
+            "my-heart-will-go-on-histoire",
+            "comeback-celine-dion-jo-paris-2027",
+            "its-all-coming-back-to-me-now-steinman",
+            "pour-que-tu-maimes-encore-goldman"
+          ]
+        }
+      ]
+    },
+    {
+      "axe": "Carriere et univers artistique",
+      "description": "Pages transversales sur les grands moments de la carriere de Celine Dion. Angle editorial fort : pas une biographie Wikipedia, mais des recits de moments pivots qui eclairent l'artiste qu'on verra sur scene en 2027.",
+      "pages": [
+        {
+          "slug_page": "album-deux-goldman-celine-dion",
+          "titre_fr": "D'eux : comment Goldman et Celine ont cree l'album francophone le plus vendu de l'histoire",
+          "titre_en": "D'eux: how Goldman and Celine created the best-selling French-language album ever",
+          "requete_cible": "album D'eux Celine Dion Goldman meilleur vente francophone",
+          "description": "En 1994, Jean-Jacques Goldman passe sept mois a etudier la vie de Celine avant d'ecrire une seule note. L'enregistrement dure une semaine au Mega Studio a Paris. Goldman lui demande de changer sa facon de chanter, de modifier sa prononciation -- elle comprend instantanement. Le resultat : D'eux sort en mars 1995 et devient l'album francophone le plus vendu de tous les temps avec plus de 10 millions de copies. 26 chansons ensemble sur 30 ans de collaboration. Pourquoi Goldman dit que travailler avec Celine etait a la fois une chance et une malchance.",
+          "angle_editorial": "L'histoire d'une rencontre artistique improbable : le songwriter le plus discret de France et la voix la plus grande du monde. Sept mois de preparation, une semaine d'enregistrement, 10 millions de disques.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "pour-que-tu-maimes-encore-goldman",
+            "dansons-nouveau-single-2026",
+            "comeback-celine-dion-jo-paris-2027",
+            "all-by-myself-hymne-resilience"
+          ]
+        },
+        {
+          "slug_page": "comeback-celine-dion-jo-paris-2027",
+          "titre_fr": "Le comeback de Celine Dion : de la Tour Eiffel aux JO jusqu'a Paris 2027",
+          "titre_en": "Celine Dion's comeback: from the Eiffel Tower at the Olympics to Paris 2027",
+          "requete_cible": "Celine Dion comeback retour scene JO Paris concert 2027",
+          "description": "Chronologie factuelle du retour le plus attendu de la musique. Decembre 2022 : annonce du diagnostic de syndrome de la personne raide. 2023 : annulation du Courage World Tour. Juin 2024 : documentaire Je suis : Celine Dion (record Prime Video, 100 % sur Rotten Tomatoes). 26 juillet 2024 : Hymne a l'amour depuis la Tour Eiffel aux JO de Paris, premiere prestation live depuis 2020, devant 300 000 spectateurs. Mars 2026 : annonce de la residence a Paris La Defense Arena. Avril 2026 : sortie de Dansons, premier single en 7 ans. 480 000 billets vendus en quelques heures. Mai 2027 : 10 dates supplementaires.",
+          "angle_editorial": "Pas un article medical, mais le recit d'un retour que personne n'osait esperer. Chaque etape du comeback, des moments les plus sombres a l'annonce qui a fait pleurer des millions de fans.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "dansons-nouveau-single-2026",
+            "my-heart-will-go-on-histoire",
+            "album-deux-goldman-celine-dion",
+            "all-by-myself-hymne-resilience",
+            "the-power-of-love-premier-numero-un"
+          ]
+        },
+        {
+          "slug_page": "dansons-nouveau-single-2026",
+          "titre_fr": "Dansons : le nouveau single de Celine Dion ecrit par Goldman, 30 ans apres D'eux",
+          "titre_en": "Dansons: Celine Dion's new single written by Goldman, 30 years after D'eux",
+          "requete_cible": "Dansons Celine Dion Goldman nouveau single 2026",
+          "description": "Le 17 avril 2026, Celine Dion sort Dansons, son premier single original en 7 ans. Ecrit par Jean-Jacques Goldman, produit par Goldman, Luc Leroy et Yann Mace. Premiere collaboration Goldman-Dion depuis Encore un soir (2016). Le titre entre directement numero 1 au Quebec et numero 3 en Belgique. Les critiques saluent une ballade intime sur l'espoir et la resilience. 30 ans apres D'eux et Pour que tu m'aimes encore, Goldman et Celine bouclent la boucle.",
+          "angle_editorial": "30 ans separent D'eux de Dansons. Le meme duo, la meme alchimie, mais un contexte radicalement different. Pourquoi ce titre represente bien plus qu'une chanson : c'est la preuve que Celine est de retour.",
+          "priorite": "haute",
+          "liens_internes": [
+            "hub (page countdown)",
+            "album-deux-goldman-celine-dion",
+            "pour-que-tu-maimes-encore-goldman",
+            "comeback-celine-dion-jo-paris-2027",
+            "my-heart-will-go-on-histoire"
+          ]
+        }
+      ]
+    }
+  ],
+  "maillage": "Le hub (page countdown) est le centre du reseau. Il lie vers les 8 pages satellites, organisees en deux clusters complementaires. Cluster 1 (Chansons iconiques) : 5 pages sur les titres emblematiques, fortement liees entre elles par des renvois naturels (memes albums, meme epoque, comparaisons). Cluster 2 (Carriere) : 3 pages transversales qui contextualisent l'artiste et son retour. Les deux clusters sont relies par des liens croises : la page D'eux lie vers Pour que tu m'aimes encore et Dansons ; la page comeback lie vers My Heart Will Go On et All By Myself ; la page Dansons lie vers D'eux et le comeback. Chaque page lie le hub + 4 a 5 pages soeurs. Aucune page orpheline. Ancres naturelles et variees : on utilise le titre de la chanson, le nom de l'album, ou une description contextuelle (ex: 'le retour de Celine sur scene', 'la collaboration Goldman-Dion') plutot que des ancres mecaniques repetitives.",
+  "requetes_couvertes": [
+    "My Heart Will Go On histoire chanson",
+    "My Heart Will Go On Celine Dion Titanic anecdote",
+    "Pour que tu m'aimes encore Goldman histoire",
+    "Pour que tu m'aimes encore chanson Celine Dion",
+    "The Power of Love Celine Dion reprise Jennifer Rush",
+    "The Power of Love histoire chanson",
+    "It's All Coming Back to Me Now Jim Steinman Celine Dion",
+    "It's All Coming Back to Me Now histoire Meat Loaf",
+    "All By Myself Celine Dion histoire",
+    "All By Myself chanson originale Eric Carmen",
+    "album D'eux Celine Dion Goldman",
+    "meilleur album francophone vendu",
+    "Celine Dion Goldman collaboration",
+    "Celine Dion comeback retour scene",
+    "Celine Dion JO Paris 2024 Tour Eiffel",
+    "Celine Dion syndrome personne raide retour",
+    "Dansons Celine Dion Goldman 2026",
+    "Dansons nouveau single Celine Dion",
+    "Celine Dion concert Paris 2027",
+    "Celine Dion Paris La Defense Arena 2027"
+  ],
+  "volume_premiere_vague": {
+    "pages_haute_priorite": 6,
+    "pages_moyenne_priorite": 2,
+    "total": 8,
+    "justification": "8 pages pour un site neuf, dont 6 en haute priorite. Les 3 plus gros titres (My Heart Will Go On, Pour que tu m'aimes encore, The Power of Love) et les 3 pages carriere (D'eux, comeback, Dansons) forment le coeur a publier en premier. Les 2 pages moyenne priorite (It's All Coming Back to Me Now, All By Myself) arrivent en second car leur potentiel SEO est reel mais legerement inferieur."
+  },
+  "pages_futures_lot_2": [
+    {
+      "slug_page": "because-you-loved-me-diane-warren",
+      "requete_cible": "Because You Loved Me Celine Dion histoire chanson",
+      "justification": "611M streams Spotify (2e titre le plus ecoute). Histoire riche avec Diane Warren et le film Up Close and Personal. A publier quand le site a de l'autorite."
+    },
+    {
+      "slug_page": "sil-suffisait-daimer-chanson",
+      "requete_cible": "S'il suffisait d'aimer Celine Dion chanson histoire",
+      "justification": "Titre francophone tres recherche, album eponyme de 1998, ecrit par Goldman. Complete le cluster francophone."
+    },
+    {
+      "slug_page": "beauty-and-the-beast-duo-peabo-bryson",
+      "requete_cible": "Beauty and the Beast Celine Dion Peabo Bryson histoire",
+      "justification": "194M streams. Premier titre Disney de Celine (1991), avant meme Titanic. Angle nostalgie et lien avec My Heart Will Go On (deux BO de films)."
+    },
+    {
+      "slug_page": "think-twice-succes-europeen",
+      "requete_cible": "Think Twice Celine Dion histoire UK numero 1",
+      "justification": "Titre souvent oublie hors Europe mais qui a ete 7 semaines numero 1 au UK en 1995. Angle editorial fort sur le succes inattendu."
+    },
+    {
+      "slug_page": "chansons-esperees-setlist-paris-2027",
+      "requete_cible": "setlist Celine Dion Paris 2027 chansons esperees",
+      "justification": "Page editoriale liant toutes les pages chansons. A publier quand le site a suffisamment de pages individuelles pour que le maillage interne soit dense."
+    }
+  ],
+  "sources_factuelles": [
+    "Wikipedia - My Heart Will Go On (histoire de creation, charts, ventes)",
+    "Wikipedia - Pour que tu m'aimes encore (records Guinness, classements)",
+    "Wikipedia - The Power of Love chanson de Jennifer Rush (historique, reprises)",
+    "Wikipedia - It's All Coming Back to Me Now (Jim Steinman, versions, litige Meat Loaf)",
+    "Wikipedia - D'eux (album, ventes, collaboration Goldman)",
+    "Wikipedia - Dansons (single 2026, Goldman, production)",
+    "Wikipedia - I Am: Celine Dion (documentaire, reception)",
+    "Billboard.com (oral history My Heart Will Go On, charts)",
+    "Songfacts.com (faits verifies par chanson)",
+    "kworb.net/spotify (donnees de streams Spotify publiques)",
+    "olympics.com (performance JO Paris 2024)",
+    "celinedion.com (annonces officielles concerts et single)",
+    "nostalgie.fr / INA (interviews Goldman sur la collaboration)"
+  ]
+}

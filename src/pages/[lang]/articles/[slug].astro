@@ -1,0 +1,185 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import articles from '../../../data/articles.json';
+import data from '../../../data/data.json';
+import { t, locales, localePath, type Locale } from '../../../i18n';
+
+export function getStaticPaths() {
+  return locales.flatMap((lang) =>
+    articles.map((article) => ({
+      params: { lang, slug: article.slug },
+      props: { article },
+    }))
+  );
+}
+
+const { lang } = Astro.params;
+const locale = lang as Locale;
+const { article } = Astro.props as { article: (typeof articles)[0] };
+
+const siteUrl = import.meta.env.SITE || 'https://celineparis2027.com';
+const articleUrl = `${siteUrl}${localePath(locale, `/articles/${article.slug}/`)}`;
+
+const titre = article.titre[locale] || article.titre.fr;
+const description = article.description[locale] || article.description.fr;
+const contenu = article.contenu[locale] || article.contenu.fr;
+
+const linkedArticles = articles.filter((a) => article.liens_internes.includes(a.slug));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: titre,
+  description: description,
+  url: articleUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: data.titre,
+  },
+};
+---
+
+<Layout
+  title={titre}
+  description={description}
+  jsonLd={jsonLd}
+  canonical={articleUrl}
+  ogType="article"
+  locale={locale}
+>
+  <article class="article-page">
+    <a href={localePath(locale)} class="back-link" aria-label={t(locale, 'article.back_label')}>
+      <span aria-hidden="true">&larr;</span> {t(locale, 'article.back')}
+    </a>
+
+    <span class="badge badge--article">{article.axe === 'chansons' ? t(locale, 'article.badge_song') : t(locale, 'article.badge_career')}</span>
+
+    <h1>{titre}</h1>
+
+    <div class="article-body" set:html={contenu} />
+
+    {linkedArticles.length > 0 && (
+      <nav class="article-related" aria-label={t(locale, 'article.related_label')}>
+        <h2>{t(locale, 'article.related')}</h2>
+        <ul>
+          {linkedArticles.map((a) => (
+            <li>
+              <a href={localePath(locale, `/articles/${a.slug}/`)}>
+                {a.titre[locale] || a.titre.fr}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="article-cta">
+      <p>{t(locale, 'article.cta')}</p>
+      <a href={localePath(locale)} class="cta-link">{t(locale, 'article.cta_link')}</a>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .article-page {
+    max-width: 48rem;
+    margin-inline: auto;
+    padding-block: 2rem;
+  }
+
+  .article-page h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    line-height: 1.25;
+  }
+
+  .badge--article {
+    background: color-mix(in srgb, var(--c-accent) 15%, transparent);
+    color: var(--c-accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2em 0.65em;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .article-body {
+    line-height: 1.8;
+    font-size: 1.05rem;
+    color: var(--c-texte);
+  }
+
+  .article-body :global(h2) {
+    font-family: var(--font-titre);
+    font-size: 1.3rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--c-accent);
+  }
+
+  .article-body :global(p) {
+    margin-bottom: 1.25rem;
+    color: color-mix(in srgb, var(--c-texte) 90%, var(--c-texte-secondaire));
+  }
+
+  .article-related {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--c-bordure);
+  }
+
+  .article-related h2 {
+    font-family: var(--font-titre);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--c-accent);
+  }
+
+  .article-related ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .article-related a {
+    display: block;
+    padding: 0.75rem 1rem;
+    background: var(--c-fond-carte);
+    border: 1px solid var(--c-bordure);
+    border-radius: var(--r-moyen);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 0.95rem;
+  }
+
+  .article-related a:hover {
+    border-color: var(--c-accent);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.1);
+    text-decoration: none;
+  }
+
+  .article-cta {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    background: var(--c-fond-carte);
+    border: 1px solid var(--c-bordure);
+    border-radius: var(--r-moyen);
+  }
+
+  .article-cta p {
+    color: var(--c-texte-secondaire);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    font-family: var(--font-titre);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--c-accent);
+  }
+</style>
