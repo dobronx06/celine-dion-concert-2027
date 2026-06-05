@@ -22,28 +22,43 @@ const displayDate = eventDate.toLocaleDateString('fr-FR', {
 });
 ---
 
-<article class="event-card">
-  <div class="meta-row">
-    {confirme
-      ? <span class="badge badge--confirmed">Confirmé</span>
-      : <span class="badge badge--estimated">Estimé</span>
-    }
-    {isPast && <span class="badge badge--passed">Passé</span>}
-    <time datetime={dateIso} style="font-size:0.85rem;color:var(--c-texte-secondaire)">{displayDate}</time>
-  </div>
+{linked ? (
+  <a href={`/${slug}/`} class="event-card-link">
+    <article class="event-card">
+      <div class="meta-row">
+        {confirme
+          ? <span class="badge badge--confirmed">Confirmé</span>
+          : <span class="badge badge--estimated">Estimé</span>
+        }
+        {isPast && <span class="badge badge--passed">Passé</span>}
+        <time datetime={dateIso} style="font-size:0.85rem;color:var(--c-texte-secondaire)">{displayDate}</time>
+      </div>
 
-  {linked ? (
-    <h2 style="margin-bottom:0.5rem">
-      <a href={`/${slug}/`} style="color:var(--c-texte);text-decoration:none;">
+      <h2 style="margin-bottom:0.5rem">
         {nom}
         <span style="font-size:0.8em;opacity:0.5" aria-hidden="true"> &rarr;</span>
-      </a>
-    </h2>
-  ) : (
+      </h2>
+
+      <p style="color:var(--c-texte-secondaire);font-size:0.95rem;margin-bottom:1.25rem;">{descriptionCourte}</p>
+
+      <CountdownTimer dateIso={dateIso} fuseau={fuseau} confirme={confirme} id={slug} />
+    </article>
+  </a>
+) : (
+  <article class="event-card">
+    <div class="meta-row">
+      {confirme
+        ? <span class="badge badge--confirmed">Confirmé</span>
+        : <span class="badge badge--estimated">Estimé</span>
+      }
+      {isPast && <span class="badge badge--passed">Passé</span>}
+      <time datetime={dateIso} style="font-size:0.85rem;color:var(--c-texte-secondaire)">{displayDate}</time>
+    </div>
+
     <h2 style="margin-bottom:0.5rem">{nom}</h2>
-  )}
 
-  <p style="color:var(--c-texte-secondaire);font-size:0.95rem;margin-bottom:1.25rem;">{descriptionCourte}</p>
+    <p style="color:var(--c-texte-secondaire);font-size:0.95rem;margin-bottom:1.25rem;">{descriptionCourte}</p>
 
-  <CountdownTimer dateIso={dateIso} fuseau={fuseau} confirme={confirme} id={slug} />
-</article>
+    <CountdownTimer dateIso={dateIso} fuseau={fuseau} confirme={confirme} id={slug} />
+  </article>
+)}

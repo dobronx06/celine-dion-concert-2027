@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import EventCard from '../components/EventCard.astro';
+import ShareButton from '../components/ShareButton.astro';
 import AdSlot from '../components/AdSlot.astro';
 import data from '../data/data.json';
 
@@ -48,6 +49,16 @@ const description = `Compte à rebours en direct pour ${events.length} événeme
         ? `${upcoming.length} événement${upcoming.length > 1 ? 's' : ''} à venir — chaque seconde compte.`
         : 'Tous les événements sont passés.'}
     </p>
+    {sorted.length > 0 && (
+      <div class="share-row" style="margin-top:1.25rem;">
+        <ShareButton
+          eventName={data.titre}
+          dateIso={sorted[0].date_iso}
+          fuseau={sorted[0].fuseau}
+          url={siteUrl}
+        />
+      </div>
+    )}
   </section>
 
   <section class="events-grid" aria-label="Liste des événements">
@@ -61,10 +72,10 @@ const description = `Compte à rebours en direct pour ${events.length} événeme
           confirme={event.confirme}
           descriptionCourte={event.description_courte}
         />
-        {i === 1 && <AdSlot id="ad-mid" format="banner" />}
+        {/* {i === 1 && <AdSlot id="ad-mid" format="banner" />} */}
       </>
     ))}
   </section>
 
-  <AdSlot id="ad-bottom" format="banner" />
+  {/* <AdSlot id="ad-bottom" format="banner" /> */}
 </Layout>
