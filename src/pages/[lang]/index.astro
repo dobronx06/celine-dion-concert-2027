@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import EventCard from '../../components/EventCard.astro';
+import ShareButton from '../../components/ShareButton.astro';
+import data from '../../data/data.json';
+import { t, locales, localePath, type Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const locale = lang as Locale;
+
+const events = data.evenements;
+const now = Date.now();
+const upcoming = events
+  .filter(e => new Date(e.date_iso).getTime() > now)
+  .sort((a, b) => new Date(a.date_iso).getTime() - new Date(b.date_iso).getTime());
+const past = events
+  .filter(e => new Date(e.date_iso).getTime() <= now)
+  .sort((a, b) => new Date(b.date_iso).getTime() - new Date(a.date_iso).getTime());
+const sorted = [...upcoming, ...past];
+
+const siteUrl = import.meta.env.SITE || 'https://celineparis2027.com';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: data.titre,
+  numberOfItems: events.length,
+  itemListElement: sorted.map((e, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${siteUrl}${localePath(locale, `/${e.slug}/`)}`,
+    name: e.nom,
+  })),
+};
+
+const description = t(locale, 'home.description', { count: String(events.length) });
+---
+
+<Layout
+  title={t(locale, 'home.title')}
+  description={description}
+  jsonLd={jsonLd}
+  ogImage={`/${locale}/og/index.svg`}
+  locale={locale}
+>
+  <section class="hero">
+    <h1>{data.titre}</h1>
+    <p>
+      {upcoming.length > 0
+        ? t(locale, upcoming.length === 1 ? 'home.subtitle_one' : 'home.subtitle_many', { count: String(upcoming.length) })
+        : t(locale, 'home.all_past')}
+    </p>
+    {sorted.length > 0 && (
+      <div class="share-row" style="margin-top:1.25rem;">
+        <ShareButton
+          eventName={data.titre}
+          dateIso={sorted[0].date_iso}
+          fuseau={sorted[0].fuseau}
+          url={siteUrl}
+          locale={locale}
+        />
+      </div>
+    )}
+  </section>
+
+  <section class="events-grid" aria-label={t(locale, 'home.events_label')}>
+    {sorted.map((event) => (
+      <EventCard
+        nom={event.nom}
+        slug={event.slug}
+        dateIso={event.date_iso}
+        fuseau={event.fuseau}
+        confirme={event.confirme}
+        descriptionCourte={event.description_courte}
+        locale={locale}
+      />
+    ))}
+  </section>
+</Layout>

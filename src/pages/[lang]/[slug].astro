@@ -1,17 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CountdownTimer from '../components/CountdownTimer.astro';
-import ShareButton from '../components/ShareButton.astro';
-import AdSlot from '../components/AdSlot.astro';
-import data from '../data/data.json';
-import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import CountdownTimer from '../../components/CountdownTimer.astro';
+import ShareButton from '../../components/ShareButton.astro';
+import data from '../../data/data.json';
+import { t, locales, localePath, dateLocale, type Locale } from '../../i18n';
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return data.evenements.map((event) => ({
-    params: { slug: event.slug },
-    props: { event },
-  }));
-};
+export function getStaticPaths() {
+  return locales.flatMap((lang) =>
+    data.evenements.map((event) => ({
+      params: { lang, slug: event.slug },
+      props: { event },
+    }))
+  );
+}
 
 interface EventType {
   nom: string;
@@ -22,27 +23,27 @@ interface EventType {
   description_courte: string;
 }
 
+const { lang } = Astro.params;
+const locale = lang as Locale;
 const { event } = Astro.props as { event: EventType };
 
-const siteUrl = import.meta.env.SITE || 'https://example.com';
-const eventUrl = `${siteUrl}/${event.slug}/`;
-const ogImage = `/og/${event.slug}.svg`;
+const siteUrl = import.meta.env.SITE || 'https://celineparis2027.com';
+const eventUrl = `${siteUrl}${localePath(locale, `/${event.slug}/`)}`;
+const ogImage = `/${locale}/og/${event.slug}.svg`;
 
 const eventDate = new Date(event.date_iso);
-const displayDate = eventDate.toLocaleDateString('fr-FR', {
+const displayDate = eventDate.toLocaleDateString(dateLocale(locale), {
   weekday: 'long',
   day: 'numeric',
   month: 'long',
   year: 'numeric',
 });
 
-// Find adjacent events for navigation
 const allEvents = data.evenements;
 const currentIndex = allEvents.findIndex(e => e.slug === event.slug);
 const prevEvent = currentIndex > 0 ? allEvents[currentIndex - 1] : null;
 const nextEvent = currentIndex < allEvents.length - 1 ? allEvents[currentIndex + 1] : null;
 
-// JSON-LD Event
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Event',
@@ -52,10 +53,7 @@ const jsonLd = {
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
   url: eventUrl,
-  location: {
-    '@type': 'VirtualLocation',
-    url: eventUrl,
-  },
+  location: { '@type': 'VirtualLocation', url: eventUrl },
 };
 ---
 
@@ -66,16 +64,17 @@ const jsonLd = {
   canonical={eventUrl}
   ogImage={ogImage}
   ogType="article"
+  locale={locale}
 >
   <div class="event-detail">
-    <a href="/" class="back-link" aria-label="Retour à la liste">
-      <span aria-hidden="true">&larr;</span> Tous les événements
+    <a href={localePath(locale)} class="back-link" aria-label={t(locale, 'event.back_label')}>
+      <span aria-hidden="true">&larr;</span> {t(locale, 'event.back')}
     </a>
 
     <div class="meta-row">
       {event.confirme
-        ? <span class="badge badge--confirmed">Date confirmée</span>
-        : <span class="badge badge--estimated">Date estimée</span>
+        ? <span class="badge badge--confirmed">{t(locale, 'event.confirmed')}</span>
+        : <span class="badge badge--estimated">{t(locale, 'event.estimated')}</span>
       }
       <time datetime={event.date_iso}>{displayDate}</time>
     </div>
@@ -88,6 +87,7 @@ const jsonLd = {
       fuseau={event.fuseau}
       confirme={event.confirme}
       id={event.slug}
+      locale={locale}
     />
 
     <div class="share-row">
@@ -96,27 +96,25 @@ const jsonLd = {
         dateIso={event.date_iso}
         fuseau={event.fuseau}
         url={eventUrl}
+        locale={locale}
       />
     </div>
 
-    {/* <AdSlot id="ad-event" format="rectangle" /> */}
-
     <div class="source-link" style="margin-top:2rem;text-align:center;">
       <p>
-        Source : <a href={data.source_principale} target="_blank" rel="noopener">{data.source_principale}</a>
+        {t(locale, 'source')} : <a href={data.source_principale} target="_blank" rel="noopener">{data.source_principale}</a>
       </p>
-      <p style="margin-top:0.25rem;">Fuseau horaire de l'événement : <code>{event.fuseau}</code></p>
+      <p style="margin-top:0.25rem;">{t(locale, 'event.timezone')} <code>{event.fuseau}</code></p>
     </div>
 
-    {/* Navigation between events */}
-    <nav class="event-nav" aria-label="Événements adjacents">
+    <nav class="event-nav" aria-label={t(locale, 'event.nav_label')}>
       {prevEvent ? (
-        <a href={`/${prevEvent.slug}/`}>
+        <a href={localePath(locale, `/${prevEvent.slug}/`)}>
           <span aria-hidden="true">&larr;</span> {prevEvent.nom}
         </a>
       ) : <span />}
       {nextEvent ? (
-        <a href={`/${nextEvent.slug}/`} style="text-align:right;">
+        <a href={localePath(locale, `/${nextEvent.slug}/`)} style="text-align:right;">
           {nextEvent.nom} <span aria-hidden="true">&rarr;</span>
         </a>
       ) : <span />}

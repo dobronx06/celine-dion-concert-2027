@@ -1,10 +1,21 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://celine-dion-concert-2027.example.com',
+  site: 'https://celineparis2027.com',
   output: 'static',
   build: {
     format: 'directory',
   },
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'fr',
+        locales: {
+          fr: 'fr',
+          en: 'en',
+        },
+      },
+    }),
+  ],
 });

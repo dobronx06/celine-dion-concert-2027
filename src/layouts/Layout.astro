@@ -3,6 +3,8 @@ import theme from '../data/theme.json';
 import data from '../data/data.json';
 import '../styles/global.css';
 import '../styles/celine-theme.css';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { t, altLocale, localePath, ogLocale, type Locale } from '../i18n';
 
 interface Props {
   title: string;
@@ -11,19 +13,21 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   ogType?: string;
+  locale: Locale;
 }
 
-const { title, description = '', jsonLd, canonical, ogImage, ogType = 'website' } = Astro.props;
+const { title, description = '', jsonLd, canonical, ogImage, ogType = 'website', locale } = Astro.props;
+const other = altLocale(locale);
 const siteTitle = `${title} | ${data.titre}`;
 const c = theme.couleurs;
 const f = theme.polices;
 const r = theme.arrondis;
 
-const siteUrl = import.meta.env.SITE || 'https://example.com';
+const siteUrl = import.meta.env.SITE || 'https://celineparis2027.com';
 const currentUrl = canonical || `${siteUrl}${Astro.url.pathname}`;
 const resolvedOgImage = ogImage
   ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
-  : `${siteUrl}/og/index.svg`;
+  : `${siteUrl}/${locale}/og/index.svg`;
 
 const cssVars = `:root {
   --c-fond: ${c.fond};
@@ -48,7 +52,7 @@ const cssVars = `:root {
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,6 +60,11 @@ const cssVars = `:root {
     {description && <meta name="description" content={description} />}
     {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang={locale} href={`${siteUrl}${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang={other} href={`${siteUrl}${Astro.url.pathname.replace(`/${locale}/`, `/${other}/`)}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/fr${Astro.url.pathname.replace(`/${locale}`, '')}`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={siteTitle} />
@@ -66,7 +75,8 @@ const cssVars = `:root {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content={data.titre} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={ogLocale(locale)} />
+    <meta property="og:locale:alternate" content={ogLocale(other)} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -84,11 +94,12 @@ const cssVars = `:root {
     <script defer data-domain="celineparis2027.com" src="https://plausible.io/js/script.js"></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Aller au contenu</a>
+    <a class="skip-link" href="#main">{t(locale, 'skip_link')}</a>
 
     <header class="site-header">
-      <div class="container">
-        <a href="/">{data.titre}</a>
+      <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
+        <a href={localePath(locale)}>{data.titre}</a>
+        <LanguageSwitcher locale={locale} />
       </div>
     </header>
 
@@ -99,12 +110,12 @@ const cssVars = `:root {
     <footer class="site-footer">
       <div class="container">
         <p class="disclaimer" style="font-weight: 500; margin-bottom: 1rem;">
-          Site non affilié à Céline Dion ni à ses représentants.
+          {t(locale, 'footer.disclaimer')}
         </p>
         <p class="source-link">
-          Source : <a href={data.source_principale} target="_blank" rel="noopener">{data.source_principale}</a>
+          {t(locale, 'source')} : <a href={data.source_principale} target="_blank" rel="noopener">{data.source_principale}</a>
         </p>
-        <p style="margin-top:0.5rem;">Dernière mise à jour : {data.derniere_maj}</p>
+        <p style="margin-top:0.5rem;">{t(locale, 'footer.last_updated', { date: data.derniere_maj })}</p>
       </div>
     </footer>
   </body>

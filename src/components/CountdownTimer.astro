@@ -1,12 +1,29 @@
 ---
+import { t, type Locale } from '../i18n';
+
 interface Props {
   dateIso: string;
   fuseau: string;
   confirme: boolean;
   id: string;
+  locale: Locale;
 }
 
-const { dateIso, fuseau, confirme, id } = Astro.props;
+const { dateIso, fuseau, confirme, id, locale } = Astro.props;
+
+const cdI18n = JSON.stringify({
+  days: t(locale, 'countdown.days'),
+  hours: t(locale, 'countdown.hours'),
+  min: t(locale, 'countdown.min'),
+  sec: t(locale, 'countdown.sec'),
+  happened: t(locale, 'countdown.happened'),
+  since: t(locale, 'countdown.since'),
+  in: t(locale, 'countdown.in'),
+  days_u: t(locale, 'countdown.days_unit'),
+  hours_u: t(locale, 'countdown.hours_unit'),
+  minutes_u: t(locale, 'countdown.minutes_unit'),
+  seconds_u: t(locale, 'countdown.seconds_unit'),
+});
 ---
 
 <countdown-timer
@@ -14,45 +31,45 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
   data-tz={fuseau}
   data-confirmed={confirme.toString()}
   data-id={id}
+  data-i18n={cdI18n}
   aria-live="polite"
-  aria-label="Compte à rebours"
+  aria-label={t(locale, 'countdown.label')}
 >
   <div class="countdown-wrapper" data-digits>
-    <!-- Server-rendered placeholder — replaced by JS immediately -->
     <noscript>
-      <p style="color:var(--c-texte-secondaire)">Activez JavaScript pour voir le compte à rebours en direct.</p>
+      <p style="color:var(--c-texte-secondaire)">{t(locale, 'countdown.noscript')}</p>
     </noscript>
     <div class="countdown-group">
       <div class="digit-box">
         <span class="digit-value" data-unit="days">--</span>
-        <span class="digit-label">Jours</span>
+        <span class="digit-label">{t(locale, 'countdown.days')}</span>
       </div>
       <span class="digit-sep">:</span>
       <div class="digit-box">
         <span class="digit-value" data-unit="hours">--</span>
-        <span class="digit-label">Heures</span>
+        <span class="digit-label">{t(locale, 'countdown.hours')}</span>
       </div>
       <span class="digit-sep">:</span>
       <div class="digit-box">
         <span class="digit-value" data-unit="minutes">--</span>
-        <span class="digit-label">Min</span>
+        <span class="digit-label">{t(locale, 'countdown.min')}</span>
       </div>
       <span class="digit-sep">:</span>
       <div class="digit-box">
         <span class="digit-value" data-unit="seconds">--</span>
-        <span class="digit-label">Sec</span>
+        <span class="digit-label">{t(locale, 'countdown.sec')}</span>
       </div>
     </div>
   </div>
 
   {!confirme && (
     <p class="estimated-notice" style="text-align:center;margin-top:0.75rem;">
-      <span class="badge badge--estimated">Date estimée, non confirmée</span>
+      <span class="badge badge--estimated">{t(locale, 'countdown.estimated_notice')}</span>
     </p>
   )}
 
   <div class="happened-banner" data-happened style="display:none" aria-hidden="true">
-    C'est arrivé !
+    {t(locale, 'countdown.happened')}
   </div>
 </countdown-timer>
 
@@ -61,15 +78,13 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
     private interval: ReturnType<typeof setInterval> | null = null;
     private target!: Date;
     private previous: Record<string, string> = {};
+    private i18n: Record<string, string> = {};
 
     connectedCallback() {
+      this.i18n = JSON.parse(this.dataset.i18n || '{}');
       const isoRaw = this.dataset.target!;
       const tz = this.dataset.tz!;
-
-      // Build a Date from the ISO string + timezone.
-      // We use Intl to resolve the exact UTC offset for this date in the given tz.
       this.target = this.resolveDate(isoRaw, tz);
-
       this.tick();
       this.interval = setInterval(() => this.tick(), 1000);
     }
@@ -79,19 +94,14 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
     }
 
     private resolveDate(iso: string, tz: string): Date {
-      // Parse naive datetime and resolve to UTC via the given timezone
-      const naive = new Date(iso + 'Z'); // treat as UTC temporarily
+      const naive = new Date(iso + 'Z');
       try {
-        // Get the offset of the target timezone at this date
         const formatter = new Intl.DateTimeFormat('en-US', {
           timeZone: tz,
           year: 'numeric', month: '2-digit', day: '2-digit',
           hour: '2-digit', minute: '2-digit', second: '2-digit',
           hour12: false,
         });
-        // We need to find what UTC time corresponds to this local time in `tz`.
-        // Strategy: parse the ISO as local in `tz` by binary-searching the offset.
-        // Simpler approach: use the offset from the formatter.
         const parts = formatter.formatToParts(naive);
         const get = (type: string) => parts.find(p => p.type === type)?.value ?? '0';
         const localAtUTC = new Date(
@@ -99,10 +109,8 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
                    +get('hour'), +get('minute'), +get('second'))
         );
         const offsetMs = localAtUTC.getTime() - naive.getTime();
-        // The actual event time in UTC = naive - offset
         return new Date(naive.getTime() - offsetMs);
       } catch {
-        // Fallback: treat the ISO string as-is (browser local)
         return new Date(iso);
       }
     }
@@ -116,7 +124,6 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
       const happenedEl = this.querySelector('[data-happened]') as HTMLElement;
 
       if (isPast) {
-        // Switch to count-up mode
         const elapsed = Math.abs(diff);
         this.render(elapsed, true);
         digitsEl.classList.add('count-up');
@@ -144,11 +151,12 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
         seconds: String(seconds).padStart(2, '0'),
       };
 
-      const labels: Record<string, [string, string]> = {
-        days:    isCountUp ? ['Jours', 'écoulés']  : ['Jours', ''],
-        hours:   isCountUp ? ['Heures', 'écoulées'] : ['Heures', ''],
-        minutes: isCountUp ? ['Min', 'écoulées']    : ['Min', ''],
-        seconds: isCountUp ? ['Sec', 'écoulées']    : ['Sec', ''],
+      const i = this.i18n;
+      const labels: Record<string, string> = {
+        days: i.days || 'Days',
+        hours: i.hours || 'Hours',
+        minutes: i.min || 'Min',
+        seconds: i.sec || 'Sec',
       };
 
       for (const [unit, val] of Object.entries(values)) {
@@ -157,25 +165,21 @@ const { dateIso, fuseau, confirme, id } = Astro.props;
 
         if (this.previous[unit] !== val) {
           el.textContent = val;
-          // Trigger tick animation
           el.removeAttribute('data-changed');
-          void el.offsetWidth; // force reflow
+          void el.offsetWidth;
           el.setAttribute('data-changed', '');
           this.previous[unit] = val;
         }
 
-        // Update label if count-up
         const labelEl = el.parentElement?.querySelector('.digit-label');
         if (labelEl && labels[unit]) {
-          labelEl.textContent = labels[unit][0];
+          labelEl.textContent = labels[unit];
         }
       }
 
-      // Update aria label for screen readers (throttled to every 30s for non-seconds)
-      const id = this.dataset.id;
-      const prefix = isCountUp ? 'Depuis' : 'Dans';
+      const prefix = isCountUp ? (i.since || 'Since') : (i.in || 'In');
       this.setAttribute('aria-label',
-        `${prefix} ${values.days} jours, ${values.hours} heures, ${values.minutes} minutes, ${values.seconds} secondes`
+        `${prefix} ${values.days} ${i.days_u || 'days'}, ${values.hours} ${i.hours_u || 'hours'}, ${values.minutes} ${i.minutes_u || 'minutes'}, ${values.seconds} ${i.seconds_u || 'seconds'}`
       );
     }
   }

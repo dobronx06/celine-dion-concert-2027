@@ -1,12 +1,26 @@
 ---
+import { t, type Locale } from '../i18n';
+
 interface Props {
   eventName: string;
   dateIso: string;
   fuseau: string;
   url: string;
+  locale: Locale;
 }
 
-const { eventName, dateIso, fuseau, url } = Astro.props;
+const { eventName, dateIso, fuseau, url, locale } = Astro.props;
+
+const shareI18n = JSON.stringify({
+  happened: t(locale, 'share.happened'),
+  prefix: t(locale, 'share.prefix'),
+  day: t(locale, 'share.day'),
+  days: t(locale, 'share.days'),
+  hour: t(locale, 'share.hour'),
+  hours: t(locale, 'share.hours'),
+  before: t(locale, 'share.before'),
+  copied: t(locale, 'share.copied'),
+});
 ---
 
 <share-button
@@ -14,21 +28,25 @@ const { eventName, dateIso, fuseau, url } = Astro.props;
   data-target={dateIso}
   data-tz={fuseau}
   data-url={url}
+  data-i18n={shareI18n}
 >
-  <button class="share-btn" type="button" aria-label={`Partager ${eventName}`}>
+  <button class="share-btn" type="button" aria-label={`${t(locale, 'share.label')} ${eventName}`}>
     <svg class="share-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
       <polyline points="16 6 12 2 8 6"/>
       <line x1="12" y1="2" x2="12" y2="15"/>
     </svg>
-    <span class="share-label">Partager</span>
+    <span class="share-label">{t(locale, 'share.label')}</span>
   </button>
   <span class="share-toast" aria-live="polite"></span>
 </share-button>
 
 <script>
   class ShareButton extends HTMLElement {
+    private i18n: Record<string, string> = {};
+
     connectedCallback() {
+      this.i18n = JSON.parse(this.dataset.i18n || '{}');
       const btn = this.querySelector('.share-btn') as HTMLButtonElement;
       btn.addEventListener('click', () => this.handleShare());
     }
@@ -39,9 +57,10 @@ const { eventName, dateIso, fuseau, url } = Astro.props;
       const tz = this.dataset.tz!;
       const target = this.resolveDate(iso, tz);
       const diff = target.getTime() - Date.now();
+      const i = this.i18n;
 
       if (diff <= 0) {
-        return `${name} — c'est arrivé !`;
+        return `${name} — ${i.happened || "it happened!"}`;
       }
 
       const totalSec = Math.floor(diff / 1000);
@@ -49,9 +68,9 @@ const { eventName, dateIso, fuseau, url } = Astro.props;
       const hours = Math.floor((totalSec % 86400) / 3600);
 
       if (days > 0) {
-        return `Plus que ${days} jour${days > 1 ? 's' : ''} avant ${name} !`;
+        return `${i.prefix || 'Only'} ${days} ${days > 1 ? (i.days || 'days') : (i.day || 'day')} ${i.before || 'before'} ${name} !`;
       }
-      return `Plus que ${hours} heure${hours > 1 ? 's' : ''} avant ${name} !`;
+      return `${i.prefix || 'Only'} ${hours} ${hours > 1 ? (i.hours || 'hours') : (i.hour || 'hour')} ${i.before || 'before'} ${name} !`;
     }
 
     private resolveDate(iso: string, tz: string): Date {
@@ -80,23 +99,19 @@ const { eventName, dateIso, fuseau, url } = Astro.props;
       const text = this.buildText();
       const url = this.dataset.url!;
 
-      // Try native share (mobile & supporting desktops)
       if (navigator.share) {
         try {
           await navigator.share({ title: this.dataset.event!, text, url });
           return;
         } catch (e) {
-          // User cancelled or API error — fall through to clipboard
           if ((e as DOMException).name === 'AbortError') return;
         }
       }
 
-      // Fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(`${text}\n${url}`);
-        this.showToast('Lien copié !');
+        this.showToast(this.i18n.copied || 'Link copied!');
       } catch {
-        // Last resort fallback
         const ta = document.createElement('textarea');
         ta.value = `${text}\n${url}`;
         ta.style.position = 'fixed';
@@ -105,7 +120,7 @@ const { eventName, dateIso, fuseau, url } = Astro.props;
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
-        this.showToast('Lien copié !');
+        this.showToast(this.i18n.copied || 'Link copied!');
       }
     }
 
